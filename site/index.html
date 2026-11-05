@@ -28,8 +28,8 @@
   <div class="intro">
     <h1>How well do language models understand real Telugu?</h1>
     <p>A small benchmark of questions written directly in Telugu, not translated from English, and grounded in Telangana and Andhra culture. It tests three things: cultural knowledge, Telugu–English code-mixed text as people actually type it (in Telugu script and Romanized), and reading comprehension.</p>
-    <div class="facts" id="facts"><!-- facts:start --><div><b>30</b><span>questions</span></div><div><b>3</b><span>capabilities</span></div><div><b>2</b><span>models evaluated</span></div><div><b>17.5%</b><span>random-guess level</span></div><!-- facts:end --></div>
-    <div id="notice"><!-- notice:start --><p class="notice">PRELIMINARY: includes draft items that have not been re-checked yet. 30 of 30 items were drafted with an LLM and are pending verification by a native Telugu speaker.</p><!-- notice:end --></div>
+    <div class="facts" id="facts"><!-- facts:start --><div><b>0</b><span>questions</span></div><div><b>3</b><span>capabilities</span></div><div><b>0</b><span>models evaluated</span></div><div><b>–</b><span>random-guess level</span></div><!-- facts:end --></div>
+    <div id="notice"><!-- notice:start --><!-- notice:end --></div>
   </div>
 
   <div class="controls">
@@ -44,7 +44,7 @@
   <div class="table-wrap">
     <table class="board" id="board" aria-describedby="legend">
       <!-- Pre-rendered by `python -m telugu_eval build-site` so the page is complete without JavaScript. -->
-      <!-- board:start --><thead><tr><th>#</th><th>Model</th><th>Overall</th><th>Cultural</th><th>Code-mixed</th><th>Reading comp.</th><th>Items</th></tr></thead><tbody><tr class=""><td class="rank">1</td><td class="model"><b>Gemma 4 31B (open weights)</b><span class="tag">open-weights</span></td><td class="overall"><span class="num">93.3<span class="sub">83.3–100.0</span></span></td><td>90.0</td><td>100.0</td><td>90.0</td><td>30</td></tr><tr class=""><td class="rank">2</td><td class="model"><b>Gemini 3.5 Flash-Lite</b><span class="tag">api</span></td><td class="overall"><span class="num">86.7<span class="sub">73.3–96.7</span></span></td><td>70.0</td><td>100.0</td><td>90.0</td><td>30</td></tr><tr class="baseline"><td class="rank"></td><td class="model"><b>Random guess</b><span class="tag">baseline</span></td><td class="overall"><span class="num">16.7<span class="sub">6.7–30.0</span></span></td><td>10.0</td><td>10.0</td><td>30.0</td><td>30</td></tr><tr class="incomplete"><td class="rank"></td><td class="model"><b>Gemini 3.6 Flash</b><span class="tag">api</span><span class="sub">incomplete: 4/30 items answered so far</span></td><td class="overall"><span class="num">100.0<span class="sub">100.0–100.0</span></span></td><td>100.0</td><td>100.0</td><td>–</td><td>4</td></tr></tbody><!-- board:end -->
+      <!-- board:start --><thead><tr><th>#</th><th>Model</th><th>Overall</th><th>Cultural</th><th>Code-mixed</th><th>Reading comp.</th><th>Items</th></tr></thead><tbody><tr><td class="empty" colspan="7">No results yet.</td></tr></tbody><!-- board:end -->
     </table>
   </div>
   <p class="legend" id="legend">Accuracy in %. Bar: <i class="l-range"></i>95% bootstrap confidence interval over items <i class="l-chance"></i>random-guess level. Two models whose intervals overlap heavily are not reliably different.</p>
