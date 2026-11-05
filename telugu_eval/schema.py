@@ -24,7 +24,8 @@ difficulty    enum  easy | medium | hard
 source        str   reference backing the gold answer (URL, book, "common
                     knowledge"); strongly recommended for cultural facts.
 author_note   str   free-form note (why this item, ambiguity, etc.).
-author        str   who wrote the item.
+author        str   who wrote the item (or, for LLM-drafted items, who verified it).
+origin        enum  native | llm-draft: how the item was first written. Kept after review.
 status        enum  draft | reviewed | retired. Only "reviewed" is scored.
 created       str   ISO date YYYY-MM-DD.
 canary        str   the canary string; added automatically.
@@ -47,6 +48,8 @@ REGIONS = ("telangana", "andhra", "both", "none")
 ANSWER_TYPES = ("mcq", "short")
 DIFFICULTIES = ("easy", "medium", "hard")
 STATUSES = ("draft", "reviewed", "retired")
+# How an item was first written. Kept even after review so provenance is never lost.
+ORIGINS = ("native", "llm-draft")
 LETTERS = "ABCDEF"
 
 REQUIRED_ITEM_FIELDS = (
@@ -54,19 +57,20 @@ REQUIRED_ITEM_FIELDS = (
     "answer_type", "difficulty", "status", "author", "created", "canary",
 )
 OPTIONAL_ITEM_FIELDS = (
-    "options", "gold_option", "gold_answers", "passage_id", "source", "author_note",
+    "options", "gold_option", "gold_answers", "passage_id", "source", "author_note", "origin",
 )
 # Canonical key order when writing records (readable lines, clean diffs).
 ALL_ITEM_FIELDS = (
     "id", "category", "subtopic", "script", "region", "passage_id", "question",
     "answer_type", "options", "gold_option", "gold_answers", "difficulty",
-    "source", "author_note", "author", "status", "created", "canary",
+    "source", "author_note", "author", "origin", "status", "created", "canary",
 )
 assert set(ALL_ITEM_FIELDS) == set(REQUIRED_ITEM_FIELDS + OPTIONAL_ITEM_FIELDS)
 
 REQUIRED_PASSAGE_FIELDS = ("passage_id", "title", "text", "script", "author", "created", "canary")
-OPTIONAL_PASSAGE_FIELDS = ("source", "author_note")
-ALL_PASSAGE_FIELDS = ("passage_id", "title", "script", "text", "source", "author_note", "author", "created", "canary")
+OPTIONAL_PASSAGE_FIELDS = ("source", "author_note", "origin")
+ALL_PASSAGE_FIELDS = ("passage_id", "title", "script", "text", "source", "author_note", "author", "origin",
+                      "created", "canary")
 assert set(ALL_PASSAGE_FIELDS) == set(REQUIRED_PASSAGE_FIELDS + OPTIONAL_PASSAGE_FIELDS)
 
 ITEM_ID_RE = re.compile(r"^(cul|cm|rc)-(\d{3,})$")
@@ -163,6 +167,8 @@ def check_item(item: dict, *, example: bool = False, passage_ids: set[str] | Non
     at_ok = _check_enum(rep, rid, item, "answer_type", ANSWER_TYPES)
     _check_enum(rep, rid, item, "difficulty", DIFFICULTIES)
     _check_enum(rep, rid, item, "status", STATUSES)
+    if item.get("origin") is not None:
+        _check_enum(rep, rid, item, "origin", ORIGINS)
     if "created" in item:
         _check_date(rep, rid, item["created"])
     if item.get("canary") is not None and item.get("canary") != CANARY:

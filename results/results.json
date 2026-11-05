@@ -3,11 +3,11 @@
   "dataset_version": "v1",
   "tool_version": "0.1.0",
   "generated": "2026-11-05",
-  "split": "reviewed",
+  "split": "all",
   "split_note": "Only items marked reviewed by the author are scored.",
   "prompt_version": "p1",
   "template_hash": "8e36402cf5d780fa",
-  "dataset_fingerprint": "2221af0982ee1e42",
+  "dataset_fingerprint": "ad905f1cf1de2cff",
   "judge": {
     "name": "gemini-3.5-flash-lite",
     "display_name": "Gemini 3.5 Flash-Lite",
@@ -42,7 +42,8 @@
       "telangana": 13
     },
     "n_passages": 4,
-    "n_llm_drafted": 0,
+    "n_llm_drafted": 30,
+    "n_llm_drafted_reviewed": 30,
     "n_unreviewed": 0
   },
   "models": [
@@ -507,142 +508,7 @@
         "notes": "uniform random option for MCQ, empty answer for short answers",
         "temperature_sent": 0.0
       }
-    },
-    {
-      "n_items": 30,
-      "n_scored": 4,
-      "n_missing": 26,
-      "complete": false,
-      "missing_items": [
-        "cm-001",
-        "cm-002",
-        "cm-003",
-        "cm-005",
-        "cm-006",
-        "cm-007",
-        "cm-008",
-        "cm-009",
-        "cm-010",
-        "cul-001",
-        "cul-002",
-        "cul-004",
-        "cul-005",
-        "cul-006",
-        "cul-009",
-        "cul-010",
-        "rc-001",
-        "rc-002",
-        "rc-003",
-        "rc-004",
-        "rc-005",
-        "rc-006",
-        "rc-007",
-        "rc-008",
-        "rc-009",
-        "rc-010"
-      ],
-      "overall": {
-        "n": 4,
-        "correct": 4,
-        "accuracy": 1.0,
-        "ci95": [
-          1.0,
-          1.0
-        ]
-      },
-      "parse_failures": 0,
-      "groups": {
-        "category": {
-          "code_mixed": {
-            "n": 1,
-            "correct": 1,
-            "accuracy": 1.0,
-            "ci95": [
-              1.0,
-              1.0
-            ]
-          },
-          "cultural": {
-            "n": 3,
-            "correct": 3,
-            "accuracy": 1.0,
-            "ci95": [
-              1.0,
-              1.0
-            ]
-          }
-        },
-        "script": {
-          "mixed": {
-            "n": 1,
-            "correct": 1,
-            "accuracy": 1.0
-          },
-          "telugu": {
-            "n": 3,
-            "correct": 3,
-            "accuracy": 1.0
-          }
-        },
-        "difficulty": {
-          "medium": {
-            "n": 4,
-            "correct": 4,
-            "accuracy": 1.0
-          }
-        },
-        "answer_type": {
-          "mcq": {
-            "n": 3,
-            "correct": 3,
-            "accuracy": 1.0
-          },
-          "short": {
-            "n": 1,
-            "correct": 1,
-            "accuracy": 1.0
-          }
-        },
-        "region": {
-          "andhra": {
-            "n": 1,
-            "correct": 1,
-            "accuracy": 1.0
-          },
-          "telangana": {
-            "n": 3,
-            "correct": 3,
-            "accuracy": 1.0
-          }
-        }
-      },
-      "macro_category_accuracy": 1.0,
-      "name": "gemini-3.6-flash",
-      "display_name": "Gemini 3.6 Flash",
-      "kind": "api",
-      "provider": "gemini",
-      "model": "gemini-3.6-flash",
-      "settings": {
-        "name": "gemini-3.6-flash",
-        "provider": "gemini",
-        "model": "gemini-3.6-flash",
-        "display_name": "Gemini 3.6 Flash",
-        "kind": "api",
-        "base_url": "",
-        "temperature": 0.0,
-        "send_temperature": false,
-        "max_output_tokens": 2048,
-        "extra": {
-          "generationConfig": {
-            "thinkingConfig": {
-              "thinkingLevel": "low"
-            }
-          }
-        },
-        "notes": "temperature not supported on Gemini 3.x; thinkingLevel=low",
-        "temperature_sent": null
-      }
     }
   ],
-  "notice": ""
+  "notice": "All items were drafted with an LLM, then checked by a native Telugu speaker (single annotator)."
 }

@@ -83,17 +83,38 @@ def dataset_stats(sel: Selection) -> dict:
     for g in GROUPS:
         d[f"by_{g}"] = dict(sorted(Counter(it.get(g, "none") for it in sel.items).items()))
     d["n_passages"] = len({it.get("passage_id") for it in sel.items if it.get("passage_id")})
-    # Provenance: items drafted with an LLM are counted so the site can disclose it.
-    d["n_llm_drafted"] = sum(1 for it in sel.items if it.get("author") == LLM_DRAFT_AUTHOR)
+    # Provenance: items drafted with an LLM are counted so the site can disclose it,
+    # whether or not they have since been reviewed.
+    llm = [it for it in sel.items if is_llm_drafted(it)]
+    d["n_llm_drafted"] = len(llm)
+    d["n_llm_drafted_reviewed"] = sum(1 for it in llm if it.get("status") == "reviewed")
     d["n_unreviewed"] = sum(1 for it in sel.items if it.get("status") != "reviewed")
     return d
+
+
+def is_llm_drafted(item: dict) -> bool:
+    return item.get("origin") == LLM_DRAFT_AUTHOR or item.get("author") == LLM_DRAFT_AUTHOR
+
+
+def provenance_note(ds: dict) -> str:
+    n, n_rev, total = ds.get("n_llm_drafted", 0), ds.get("n_llm_drafted_reviewed", 0), ds["n_items"]
+    if not n:
+        return ""
+    parts = []
+    if n_rev:
+        who = "All" if n_rev == total else f"{n_rev} of {total}"
+        parts.append(f"{who} items were drafted with an LLM, then checked by a native Telugu speaker (single annotator).")
+    if n - n_rev:
+        parts.append(f"{n - n_rev} of {total} items were drafted with an LLM and are pending native-speaker verification.")
+    return " ".join(parts)
 
 
 def build_results(models: list[ModelConfig], split: str, *, data_dir: Path = dataio.DATA_DIR,
                   runs_dir: Path = RUNS_DIR, judge_cfg: ModelConfig | None = None) -> tuple[dict, list[dict]]:
     sel = select_items(split, data_dir)
     rows, per_item = [], []
-    for m in models_with_outputs(models, runs_dir):
+    # Only enabled models appear on the leaderboard; disabled ones keep their raw runs in runs/.
+    for m in models_with_outputs([m for m in models if m.enabled], runs_dir):
         agg, scores = score_model(m, sel, runs_dir, judge_cfg)
         if agg["n_scored"] == 0:
             continue
@@ -105,19 +126,22 @@ def build_results(models: list[ModelConfig], split: str, *, data_dir: Path = dat
     def rank_key(r):
         return (not r["complete"], r["kind"] == "baseline", -(r["overall"]["accuracy"] or 0))
     rows.sort(key=rank_key)
+    stats = dataset_stats(sel)
+    # "all" with no drafts in it is the same item set as "reviewed": don't call it preliminary.
+    split_note = SPLIT_NOTES["reviewed"] if split == "all" and not stats["n_unreviewed"] else SPLIT_NOTES[split]
     results = {
         "benchmark": "Telugu-LLM-Eval",
         "dataset_version": DATASET_VERSION,
         "tool_version": __version__,
         "generated": date.today().isoformat(),
         "split": split,
-        "split_note": SPLIT_NOTES[split],
+        "split_note": split_note,
         "prompt_version": PROMPT_VERSION,
         "template_hash": template_hash(),
         "dataset_fingerprint": sel.fingerprint(),
         "judge": ({"name": judge_cfg.name, "display_name": judge_cfg.display_name, "version": JUDGE_VERSION}
                   if judge_cfg else None),
-        "dataset": dataset_stats(sel),
+        "dataset": stats,
         "models": rows,
     }
     results["notice"] = notice_text(results)
@@ -143,8 +167,7 @@ def results_markdown(res: dict) -> str:
     note = [
         "",
         f"Accuracy in %, strict scoring (exact match after normalisation). Split: `{res['split']}`: {res['split_note']}",
-        *([f"**Note:** {res['dataset']['n_llm_drafted']} of {res['dataset']['n_items']} items were drafted with an LLM "
-           "and are pending native-speaker verification."] if res["dataset"].get("n_llm_drafted") else []),
+        *([f"**Note:** {provenance_note(ds)}"] if provenance_note(ds) else []),
         f"{ds['n_items']} items; chance level {pct(ds['chance_accuracy'])}%. Prompt `{res['prompt_version']}`, "
         f"dataset {res['dataset_version']} (`{res['dataset_fingerprint']}`), generated {res['generated']}.",
     ]
@@ -264,12 +287,11 @@ def _replace_block(text: str, name: str, content: str) -> str:
 def notice_text(res: dict) -> str:
     """Plain-text disclosure shown above the leaderboard (empty when nothing to disclose)."""
     parts = []
-    if res["split"] != "reviewed":
-        parts.append(res["split_note"])
     ds = res["dataset"]
-    if ds.get("n_llm_drafted"):
-        parts.append(f"{ds['n_llm_drafted']} of {ds['n_items']} items were drafted with an LLM and are pending "
-                     "verification by a native Telugu speaker.")
+    if res["split"] != "reviewed" and (ds.get("n_unreviewed") or res["split"] == "examples"):
+        parts.append(res["split_note"])
+    if provenance_note(ds):
+        parts.append(provenance_note(ds))
     return " ".join(parts)
 
 

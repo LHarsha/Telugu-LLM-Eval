@@ -36,6 +36,7 @@ max_retries = 5
 
 [[model]]
 name = "gemini-3.8-flash"
+enabled = false   # free tier: 20 requests/day; partial runs kept in runs/, hidden from the leaderboard
 display_name = "Gemini 3.8 Flash"
 provider = "gemini"
 model = "gemini-3.8-flash"
@@ -50,6 +51,7 @@ notes = "temperature not supported on Gemini 3.x; thinkingLevel=low; free tier ~
 
 [[model]]
 name = "gemini-3.6-flash"
+enabled = false   # free tier: 20 requests/day; partial runs kept in runs/, hidden from the leaderboard
 display_name = "Gemini 3.6 Flash"
 provider = "gemini"
 model = "gemini-3.6-flash"

@@ -334,6 +334,48 @@ def test_llm_drafted_items_are_disclosed(tmp_path):
     assert res_n["dataset"]["n_llm_drafted"] == 0 and notice_text(res_n) == ""
 
 
+def test_origin_survives_review_and_wording_follows_status(tmp_path):
+    from telugu_eval.report import notice_text
+    items = make_dataset(tmp_path)
+    for it in items:
+        it.update(origin="llm-draft", author="Reviewer Name", status="reviewed")
+    dataio.write_jsonl(tmp_path / dataio.ITEMS_FILE, items)
+    res, _ = build_results([], "all", data_dir=tmp_path, runs_dir=tmp_path / "runs")
+    assert res["dataset"]["n_llm_drafted"] == 3 and res["dataset"]["n_llm_drafted_reviewed"] == 3
+    note = notice_text(res)
+    assert "All items were drafted with an LLM, then checked by a native Telugu speaker" in note
+    assert "pending" not in note
+    assert "PRELIMINARY" not in note and "PRELIMINARY" not in res["split_note"]   # nothing unreviewed
+    # one item back to draft -> mixed wording, preliminary again
+    items[2]["status"] = "draft"
+    dataio.write_jsonl(tmp_path / dataio.ITEMS_FILE, items)
+    res2, _ = build_results([], "all", data_dir=tmp_path, runs_dir=tmp_path / "runs")
+    n2 = notice_text(res2)
+    assert "2 of 3 items were drafted with an LLM, then checked" in n2 and "1 of 3" in n2 and "PRELIMINARY" in n2
+
+
+def test_origin_field_is_validated():
+    from telugu_eval.schema import check_item
+    good = {"id": "cul-001", "category": "cultural", "subtopic": "f", "script": "telugu", "region": "both",
+            "question": "ప్రశ్న?", "answer_type": "short", "gold_answers": ["x"], "difficulty": "easy",
+            "source": "s", "author": "a", "status": "reviewed", "created": "2026-11-05", "canary": CANARY}
+    assert not check_item({**good, "origin": "llm-draft"}).errors
+    assert not check_item(good).errors                       # optional
+    assert any(i.field == "origin" for i in check_item({**good, "origin": "ai"}).errors)
+
+
+def test_disabled_models_are_hidden_from_leaderboard(tmp_path):
+    make_dataset(tmp_path)
+    runs = tmp_path / "runs"
+    on = ModelConfig(name="on", provider="dummy", model="constant")
+    off = ModelConfig(name="off", provider="dummy", model="constant", enabled=False)
+    for m in (on, off):
+        run_model(m, select_items("all", tmp_path), runs_dir=runs, log=lambda *a: None, provider=ScriptedModel({}))
+    res, _ = build_results([on, off], "all", data_dir=tmp_path, runs_dir=runs)
+    assert [m["name"] for m in res["models"]] == ["on"]
+    assert (runs / "off" / "p1" / "outputs.jsonl").exists()     # raw runs are kept
+
+
 def test_sample_items_fall_back_to_examples(tmp_path):
     make_dataset(tmp_path)
     ex = [{"id": "ex-rc-1", "category": "reading_comprehension", "question": "q", "answer_type": "mcq",
