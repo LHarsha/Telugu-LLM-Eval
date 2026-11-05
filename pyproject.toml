@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telugu-eval"
+version = "0.1.0"
+description = "A native-authored Telugu LLM evaluation benchmark: dataset tooling, evaluation harness and scoring."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+# Step 1 (dataset tooling) uses only the Python standard library.
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/LHarsha/Telugu-LLM-Eval"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["telugu_eval*"]
+
+[tool.setuptools.package-data]
+telugu_eval = ["author/static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

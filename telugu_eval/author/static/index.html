@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telugu Eval · Authoring</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1c1a; --muted: #6b6860; --line: #e2dfd6;
+    --accent: #1f5f4a; --accent-ink: #ffffff; --err: #a3271f; --err-bg: #fbecea;
+    --warn: #7a5a00; --warn-bg: #fdf5dc; --ok: #1f5f4a; --chip: #efede6;
+    --te: "Nirmala UI", "Noto Sans Telugu", "Gautami", "Vani", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151514; --panel: #1e1e1c; --ink: #ecebe6; --muted: #a09d94; --line: #34332f;
+      --accent: #6fbf9f; --accent-ink: #0f1a15; --err: #f08b82; --err-bg: #3a1f1c;
+      --warn: #e8c766; --warn-bg: #352d14; --chip: #2a2927; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { display: flex; align-items: baseline; gap: 16px; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; letter-spacing: .01em; }
+  header .progress { display: flex; gap: 18px; color: var(--muted); font-size: 13px; margin-left: auto; flex-wrap: wrap; }
+  .bar { display: inline-block; width: 70px; height: 5px; background: var(--line); border-radius: 3px; vertical-align: middle; margin-left: 6px; overflow: hidden; }
+  .bar i { display: block; height: 100%; background: var(--accent); }
+  main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 0; min-height: calc(100vh - 50px); }
+  @media (max-width: 960px) { main { grid-template-columns: 1fr; } aside { border-left: 0; border-top: 1px solid var(--line); } }
+  form { padding: 18px 20px 40px; max-width: 860px; }
+  aside { border-left: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; max-height: calc(100vh - 50px); position: sticky; top: 0; }
+  .row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 10px; align-items: start; margin-bottom: 12px; }
+  .row > label:first-child { color: var(--muted); padding-top: 6px; font-size: 13px; }
+  .seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--panel); }
+  .seg button { border: 0; background: transparent; color: var(--ink); padding: 6px 11px; font: inherit; cursor: pointer; border-right: 1px solid var(--line); }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  input[type=text], textarea, select { width: 100%; font: inherit; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; }
+  textarea { resize: vertical; }
+  .te { font-family: var(--te); font-size: 16px; line-height: 1.7; }
+  input:focus, textarea:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .opt { display: grid; grid-template-columns: 26px 24px minmax(0, 1fr); gap: 6px; align-items: center; margin-bottom: 6px; }
+  .opt b { text-align: center; color: var(--muted); }
+  .btn { font: inherit; padding: 7px 13px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn.small { padding: 3px 9px; font-size: 12px; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .actions { display: flex; gap: 8px; align-items: center; margin-top: 18px; flex-wrap: wrap; }
+  .actions .msg { color: var(--muted); font-size: 13px; }
+  .issues { margin: 14px 0 0; padding: 0; list-style: none; }
+  .issues li { padding: 6px 10px; border-radius: 6px; margin-bottom: 4px; font-size: 13px; }
+  .issues li.error { background: var(--err-bg); color: var(--err); }
+  .issues li.warning { background: var(--warn-bg); color: var(--warn); }
+  .issues code { font-size: 12px; opacity: .8; }
+  .passage-box { border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--panel); margin-top: 8px; }
+  .passage-preview { white-space: pre-wrap; max-height: 180px; overflow: auto; margin-top: 8px; color: var(--ink); }
+  .idtag { font-family: ui-monospace, Consolas, monospace; font-size: 13px; background: var(--chip); padding: 2px 8px; border-radius: 4px; }
+  .editing { color: var(--warn); font-size: 13px; margin-left: 8px; }
+  .list-head { padding: 12px 14px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; }
+  .list-head .filters { display: flex; gap: 6px; }
+  .list { overflow: auto; flex: 1; }
+  .list button.item { display: block; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); padding: 9px 14px; cursor: pointer; font: inherit; }
+  .list button.item:hover, .list button.item.active { background: var(--chip); }
+  .list .meta { display: flex; gap: 6px; font-size: 12px; color: var(--muted); align-items: center; }
+  .list .q { font-family: var(--te); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+  .st { font-size: 11px; padding: 0 6px; border-radius: 3px; background: var(--chip); }
+  .st.reviewed { background: var(--accent); color: var(--accent-ink); }
+  .st.retired { text-decoration: line-through; }
+  .empty { padding: 20px 14px; color: var(--muted); }
+  kbd { font-family: ui-monospace, Consolas, monospace; font-size: 11px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px; padding: 0 4px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Telugu Eval · authoring</h1>
+  <div class="progress" id="progress"></div>
+</header>
+<main>
+  <form id="form" autocomplete="off" onsubmit="return false">
+    <div class="row"><label>Item</label>
+      <div><span class="idtag" id="idtag">—</span><span class="editing" id="editing" hidden>editing existing item</span></div></div>
+
+    <div class="row"><label>Category</label><div class="seg" data-field="category"></div></div>
+    <div class="row"><label>Answer type</label><div class="seg" data-field="answer_type"></div></div>
+    <div class="row"><label>Script</label>
+      <div><div class="seg" data-field="script"></div><div class="hint" id="scriptHint"></div></div></div>
+    <div class="row"><label>Region</label><div class="seg" data-field="region"></div></div>
+    <div class="row"><label>Difficulty</label>
+      <div><div class="seg" data-field="difficulty"></div>
+      <div class="hint">easy: most native speakers know it · medium: needs some regional/cultural familiarity · hard: specialist knowledge or multi-step reasoning</div></div></div>
+    <div class="row"><label for="subtopic">Subtopic</label>
+      <div><input type="text" id="subtopic" list="subtopics" placeholder="e.g. festivals, food, idioms, chat, news"><datalist id="subtopics"></datalist></div></div>
+
+    <div class="row" id="passageRow" hidden><label>Passage</label>
+      <div>
+        <div style="display:flex; gap:8px">
+          <select id="passage"></select>
+          <button type="button" class="btn" id="newPassage">New passage</button>
+          <button type="button" class="btn" id="editPassage">Edit</button>
+        </div>
+        <div class="passage-preview te" id="passagePreview"></div>
+        <div class="passage-box" id="passageEditor" hidden>
+          <div class="row"><label>ID</label><div><span class="idtag" id="pid">—</span></div></div>
+          <div class="row"><label for="ptitle">Title</label><input type="text" id="ptitle" class="te"></div>
+          <div class="row"><label for="ptext">Text</label><textarea id="ptext" rows="8" class="te" lang="te"></textarea></div>
+          <div class="row"><label for="psource">Source</label><input type="text" id="psource" placeholder="original / own writing / reference"></div>
+          <div class="row"><label for="pnote">Note</label><input type="text" id="pnote"></div>
+          <div class="actions"><button type="button" class="btn primary" id="savePassage">Save passage</button>
+            <button type="button" class="btn" id="cancelPassage">Cancel</button><span class="msg" id="pmsg"></span></div>
+          <ul class="issues" id="pissues"></ul>
+        </div>
+      </div></div>
+
+    <div class="row"><label for="question">Question</label>
+      <div><textarea id="question" rows="4" class="te" lang="te" placeholder="ప్రశ్న…"></textarea>
+      <div class="hint">For code-mixed items, put the message being asked about inside the question.</div></div></div>
+
+    <div class="row" id="mcqRow"><label>Options</label>
+      <div><div id="options"></div>
+        <button type="button" class="btn small" id="addOpt">+ option</button>
+        <button type="button" class="btn small" id="delOpt">− option</button>
+        <div class="hint">Pick the correct option with the radio button. Don't type “A)”; letters are added by the prompt.</div></div></div>
+
+    <div class="row" id="shortRow" hidden><label for="gold">Accepted answers</label>
+      <div><textarea id="gold" rows="4" class="te" lang="te" placeholder="one per line: మామిడి&#10;మామిడికాయ&#10;mamidi"></textarea>
+      <div class="hint">Every answer you would mark correct, one per line: spellings, Telugu + Romanized + English forms.</div></div></div>
+
+    <div class="row"><label for="source">Source</label><input type="text" id="source" placeholder="URL or reference backing the answer"></div>
+    <div class="row"><label for="note">Author note</label><textarea id="note" rows="2" placeholder="why this item, possible ambiguity…"></textarea></div>
+    <div class="row"><label>Status</label><div class="seg" data-field="status"></div></div>
+    <div class="row"><label for="author">Author</label><input type="text" id="author" placeholder="your name (remembered)"></div>
+
+    <ul class="issues" id="issues"></ul>
+    <div class="actions">
+      <button type="button" class="btn primary" id="saveNew">Save &amp; next <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+      <button type="button" class="btn" id="clear">New blank item</button>
+      <span class="msg" id="msg"></span>
+    </div>
+  </form>
+
+  <aside>
+    <div class="list-head">
+      <input type="text" id="search" placeholder="Search id or text…">
+      <div class="filters">
+        <select id="fcat"><option value="">all categories</option></select>
+        <select id="fstatus"><option value="">all statuses</option></select>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const LETTERS = "ABCDEF";
+let S = null;                 // server state
+let editingId = null;         // id of item being edited, or null for new
+let editingPassageId = null;
+const F = { category: "cultural", answer_type: "mcq", script: "telugu", region: "both", difficulty: "medium", status: "draft" };
+let nOptions = 4, goldIdx = null;
+let scriptTouched = false;
+
+const LABELS = { reading_comprehension: "reading comp.", code_mixed: "code-mixed" };
+
+async function api(path, body) {
+  const r = await fetch(path, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : {});
+  return r.json();
+}
+
+function renderSegs() {
+  document.querySelectorAll(".seg").forEach((el) => {
+    const f = el.dataset.field;
+    el.innerHTML = "";
+    for (const v of S.enums[f]) {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = LABELS[v] || v.replace("_", " ");
+      b.setAttribute("aria-pressed", String(F[f] === v));
+      b.onclick = () => { F[f] = v; if (f === "script") scriptTouched = true; renderSegs(); layout(); scheduleCheck(); };
+      el.appendChild(b);
+    }
+  });
+}
+
+function renderOptions(values = null) {
+  const cur = values || [...document.querySelectorAll("#options input[type=text]")].map((i) => i.value);
+  const box = $("#options"); box.innerHTML = "";
+  for (let i = 0; i < nOptions; i++) {
+    const row = document.createElement("div"); row.className = "opt";
+    row.innerHTML = `<b>${LETTERS[i]}</b><input type="radio" name="gold" aria-label="${LETTERS[i]} is correct" ${goldIdx === i ? "checked" : ""}>
+      <input type="text" class="te" lang="te" aria-label="option ${LETTERS[i]}">`;
+    row.querySelector("input[type=text]").value = cur[i] || "";
+    row.querySelector("input[type=radio]").onchange = () => { goldIdx = i; scheduleCheck(); };
+    row.querySelector("input[type=text]").oninput = scheduleCheck;
+    box.appendChild(row);
+  }
+}
+
+function layout() {
+  const rc = F.category === "reading_comprehension";
+  $("#passageRow").hidden = !rc;
+  $("#mcqRow").hidden = F.answer_type !== "mcq";
+  $("#shortRow").hidden = F.answer_type !== "short";
+  $("#idtag").textContent = editingId || (S ? S.next_ids[F.category] + " (new)" : "—");
+  $("#editing").hidden = !editingId;
+  const subs = (S && S.subtopics[F.category]) || [];
+  $("#subtopics").innerHTML = subs.map((s) => `<option value="${esc(s)}">`).join("");
+  renderPassagePreview();
+}
+
+function esc(s) { return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+function renderPassages(selected) {
+  const sel = $("#passage");
+  sel.innerHTML = `<option value="">— choose a passage —</option>` +
+    S.passages.map((p) => `<option value="${esc(p.passage_id)}">${esc(p.passage_id)} · ${esc(p.title)}</option>`).join("");
+  if (selected !== undefined) sel.value = selected;
+  renderPassagePreview();
+}
+function renderPassagePreview() {
+  const p = S && S.passages.find((x) => x.passage_id === $("#passage").value);
+  $("#passagePreview").textContent = p ? p.text : "";
+  $("#editPassage").disabled = !p;
+}
+
+function renderProgress() {
+  const t = 50;
+  $("#progress").innerHTML = S.enums.category.map((c) => {
+    const rev = S.items.filter((i) => i.category === c && i.status === "reviewed").length;
+    const all = S.items.filter((i) => i.category === c && i.status !== "retired").length;
+    return `<span>${LABELS[c] || c}: <b>${rev}</b>/${t} reviewed · ${all} total<span class="bar"><i style="width:${Math.min(100, rev / t * 100)}%"></i></span></span>`;
+  }).join("");
+}
+
+function renderList() {
+  const q = $("#search").value.trim().toLowerCase();
+  const fc = $("#fcat").value, fs = $("#fstatus").value;
+  const items = S.items.filter((i) => (!fc || i.category === fc) && (!fs || i.status === fs) &&
+    (!q || (i.id + " " + i.question + " " + (i.subtopic || "")).toLowerCase().includes(q))).slice().reverse();
+  const list = $("#list");
+  if (!items.length) { list.innerHTML = `<div class="empty">${S.items.length ? "No matches." : "No items yet. Your first one goes on the left."}</div>`; return; }
+  list.innerHTML = "";
+  for (const it of items) {
+    const b = document.createElement("button"); b.type = "button"; b.className = "item" + (it.id === editingId ? " active" : "");
+    b.innerHTML = `<div class="meta"><span class="idtag">${esc(it.id)}</span><span class="st ${esc(it.status)}">${esc(it.status)}</span>
+      <span>${esc(it.answer_type)} · ${esc(it.script)} · ${esc(it.difficulty)}</span></div><div class="q">${esc(it.question)}</div>`;
+    b.onclick = () => loadItem(it);
+    list.appendChild(b);
+  }
+}
+
+function collect() {
+  const it = {
+    category: F.category, answer_type: F.answer_type, script: F.script, region: F.region,
+    difficulty: F.difficulty, status: F.status,
+    subtopic: $("#subtopic").value, question: $("#question").value,
+    source: $("#source").value, author_note: $("#note").value, author: $("#author").value,
+  };
+  if (editingId) { it.id = editingId; const orig = S.items.find((x) => x.id === editingId); if (orig) it.created = orig.created; }
+  if (F.category === "reading_comprehension") it.passage_id = $("#passage").value;
+  if (F.answer_type === "mcq") {
+    it.options = [...document.querySelectorAll("#options input[type=text]")].map((i) => i.value);
+    it.gold_option = goldIdx === null ? "" : LETTERS[goldIdx];
+  } else {
+    it.gold_answers = $("#gold").value.split("\n").map((s) => s.trim()).filter(Boolean);
+  }
+  return it;
+}
+
+function showIssues(el, issues) {
+  el.innerHTML = issues.map((i) => `<li class="${i.level}"><code>${esc(i.field)}</code> ${esc(i.message)}</li>`).join("");
+}
+
+let checkTimer = null;
+function scheduleCheck() { clearTimeout(checkTimer); checkTimer = setTimeout(check, 350); }
+async function check() {
+  if (!$("#question").value.trim()) { showIssues($("#issues"), []); return; }
+  const r = await api("/api/check", { item: collect(), original_id: editingId });
+  showIssues($("#issues"), r.issues || []);
+}
+
+function autoScript() {
+  if (scriptTouched || editingId) return;
+  const t = $("#question").value;
+  const te = (t.match(/[ఀ-౿]/g) || []).length, la = (t.match(/[A-Za-z]/g) || []).length;
+  let g = te === 0 && la > 0 ? "romanized" : (la >= 4 && la / (te + la) >= 0.08 ? "mixed" : "telugu");
+  if (te + la === 0) return;
+  if (g !== F.script) { F.script = g; renderSegs(); }
+  $("#scriptHint").textContent = `auto-detected: ${g} (click to override)`;
+}
+
+async function save() {
+  const btn = $("#saveNew"); btn.disabled = true;
+  try {
+    const r = await api("/api/items", { item: collect(), original_id: editingId });
+    showIssues($("#issues"), r.issues || []);
+    if (!r.saved) { $("#msg").textContent = "Not saved: fix the errors above."; return; }
+    $("#msg").textContent = `Saved ${r.item.id}` + ((r.issues || []).length ? " (with warnings)" : "");
+    await refresh();
+    blank(true);
+    if ((r.issues || []).length) showIssues($("#issues"), r.issues);
+  } finally { btn.disabled = false; }
+}
+
+function blank(keepContext) {
+  editingId = null; goldIdx = null; scriptTouched = false;
+  F.status = "draft";   // new items always start as draft; reviewing is a separate pass
+  $("#question").value = ""; $("#gold").value = ""; $("#source").value = ""; $("#note").value = "";
+  if (!keepContext) $("#subtopic").value = "";
+  nOptions = 4; renderOptions(["", "", "", ""]);
+  $("#scriptHint").textContent = "";
+  renderSegs(); layout(); renderList();
+  if (!keepContext) showIssues($("#issues"), []);
+  $("#question").focus();
+}
+
+function loadItem(it) {
+  editingId = it.id; scriptTouched = true;
+  for (const k of Object.keys(F)) if (it[k]) F[k] = it[k];
+  $("#subtopic").value = it.subtopic || ""; $("#question").value = it.question || "";
+  $("#source").value = it.source || ""; $("#note").value = it.author_note || "";
+  if (it.author) $("#author").value = it.author;
+  if (it.answer_type === "mcq") {
+    nOptions = (it.options || []).length || 4; goldIdx = LETTERS.indexOf(it.gold_option); if (goldIdx < 0) goldIdx = null;
+    renderOptions(it.options || []);
+  } else { $("#gold").value = (it.gold_answers || []).join("\n"); nOptions = 4; goldIdx = null; renderOptions(["", "", "", ""]); }
+  renderPassages(it.passage_id || "");
+  $("#msg").textContent = ""; $("#scriptHint").textContent = "";
+  renderSegs(); layout(); renderList(); check();
+}
+
+// --- passages ---
+function openPassageEditor(p) {
+  editingPassageId = p ? p.passage_id : null;
+  $("#pid").textContent = p ? p.passage_id : S.next_passage_id + " (new)";
+  $("#ptitle").value = p ? p.title : ""; $("#ptext").value = p ? p.text : "";
+  $("#psource").value = p ? (p.source || "") : ""; $("#pnote").value = p ? (p.author_note || "") : "";
+  $("#pmsg").textContent = ""; showIssues($("#pissues"), []);
+  $("#passageEditor").hidden = false; $("#ptitle").focus();
+}
+async function savePassage() {
+  const p = { title: $("#ptitle").value, text: $("#ptext").value, source: $("#psource").value,
+    author_note: $("#pnote").value, author: $("#author").value };
+  if (editingPassageId) { p.passage_id = editingPassageId; const o = S.passages.find((x) => x.passage_id === editingPassageId); if (o) { p.created = o.created; p.script = o.script; } }
+  const r = await api("/api/passages", { passage: p, original_id: editingPassageId });
+  showIssues($("#pissues"), r.issues || []);
+  if (!r.saved) { $("#pmsg").textContent = "Not saved."; return; }
+  await refresh(); renderPassages(r.passage.passage_id);
+  $("#passageEditor").hidden = true; scheduleCheck();
+}
+
+async function refresh() {
+  const keep = $("#passage").value;
+  S = await api("/api/state");
+  renderProgress(); renderPassages(keep); renderList(); layout();
+}
+
+async function init() {
+  S = await api("/api/state");
+  try { $("#author").value = localStorage.getItem("author") || ""; } catch (e) {}
+  $("#author").oninput = () => { try { localStorage.setItem("author", $("#author").value); } catch (e) {} scheduleCheck(); };
+  $("#fcat").innerHTML += S.enums.category.map((c) => `<option value="${c}">${LABELS[c] || c}</option>`).join("");
+  $("#fstatus").innerHTML += S.enums.status.map((c) => `<option value="${c}">${c}</option>`).join("");
+  ["#search", "#fcat", "#fstatus"].forEach((s) => $(s).addEventListener("input", renderList));
+  $("#question").addEventListener("input", () => { autoScript(); scheduleCheck(); });
+  ["#subtopic", "#gold", "#source", "#note"].forEach((s) => $(s).addEventListener("input", scheduleCheck));
+  $("#passage").onchange = () => { renderPassagePreview(); scheduleCheck(); };
+  $("#addOpt").onclick = () => { if (nOptions < 6) { nOptions++; renderOptions(); scheduleCheck(); } };
+  $("#delOpt").onclick = () => { if (nOptions > 2) { nOptions--; if (goldIdx !== null && goldIdx >= nOptions) goldIdx = null; renderOptions(); scheduleCheck(); } };
+  $("#saveNew").onclick = save;
+  $("#clear").onclick = () => { blank(false); $("#msg").textContent = ""; };
+  $("#newPassage").onclick = () => openPassageEditor(null);
+  $("#editPassage").onclick = () => openPassageEditor(S.passages.find((x) => x.passage_id === $("#passage").value));
+  $("#savePassage").onclick = savePassage;
+  $("#cancelPassage").onclick = () => { $("#passageEditor").hidden = true; };
+  document.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      e.preventDefault();
+      if (!$("#passageEditor").hidden && document.activeElement.closest("#passageEditor")) savePassage(); else save();
+    }
+  });
+  renderProgress(); renderPassages(""); renderOptions(["", "", "", ""]); renderSegs(); layout(); renderList();
+  $("#question").focus();
+}
+init();
+</script>
+</body>
+</html>
