@@ -1,23 +1,23 @@
-{"model": "gemini-3.6-flash", "item_id": "cm-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-002", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-003", "status": "scored", "pred": "Ledu", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-001", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-002", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-003", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "cm-004", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-007", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-008", "status": "scored", "pred": "300 రూపాయలు", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cm-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-001", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-005", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-006", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-007", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-008", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-009", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cm-010", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-001", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-002", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "cul-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-004", "status": "scored", "pred": "కాకినాడ కాజా", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-005", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-004", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-005", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-006", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "cul-007", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "cul-008", "status": "scored", "pred": "ఓరుగల్లు", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-009", "status": "scored", "pred": "భోగి", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.6-flash", "item_id": "cul-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-009", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "gemini-3.6-flash", "item_id": "cul-010", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "rc-001", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "rc-002", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "rc-003", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
@@ -28,93 +28,93 @@
 {"model": "gemini-3.6-flash", "item_id": "rc-008", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "rc-009", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "gemini-3.6-flash", "item_id": "rc-010", "status": "missing", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-002", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-003", "status": "scored", "pred": "Cheyaru", "method": "answer_line", "correct": false, "judge_correct": true}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-001", "status": "scored", "pred": "8.00 AM", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "cm-004", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-007", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-008", "status": "scored", "pred": "300 రూపాయలు", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cm-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cul-001", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cul-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-005", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-007", "status": "scored", "pred": "1.5 pizzas", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-008", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-009", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cm-010", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cul-001", "status": "scored", "pred": "బాబాయ్ లేదా పెద్దనాన్న", "method": "answer_line", "correct": false, "judge_correct": false}
+{"model": "gemini-3.5-flash-lite", "item_id": "cul-002", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "cul-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cul-004", "status": "scored", "pred": "కాకినాడ కాజా", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cul-004", "status": "scored", "pred": "పెద్దమ్మ లేదా పిన్ని", "method": "answer_line", "correct": false, "judge_correct": false}
 {"model": "gemini-3.5-flash-lite", "item_id": "cul-005", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "cul-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "cul-007", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "cul-008", "status": "scored", "pred": "ఓరుగల్లు", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cul-009", "status": "scored", "pred": "భోగి", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "cul-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cul-009", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "cul-010", "status": "scored", "pred": "పిన్ని (లేదా అత్త)", "method": "answer_line", "correct": false, "judge_correct": false}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-001", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "rc-002", "status": "scored", "pred": "దాదాపు రెండు గంటలు", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "rc-003", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-004", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-004", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "rc-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemini-3.5-flash-lite", "item_id": "rc-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-007", "status": "scored", "pred": "ఏడాదికి రెండు పంటలు", "method": "answer_line", "correct": false, "judge_correct": true}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-008", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemini-3.5-flash-lite", "item_id": "rc-010", "status": "scored", "pred": "చెత్త", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-002", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-003", "status": "scored", "pred": "No", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-007", "status": "scored", "pred": "ఎనుబది ఐదు రూపాయలు", "method": "answer_line", "correct": false, "judge_correct": false}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-008", "status": "scored", "pred": "మధ్యాహ్నం మూడు గంటలకు", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-009", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemini-3.5-flash-lite", "item_id": "rc-010", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-001", "status": "scored", "pred": "8:00", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cm-004", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-007", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-008", "status": "scored", "pred": "300", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cm-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cul-001", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cul-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-005", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-007", "status": "scored", "pred": "1.5", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-008", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-009", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cm-010", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cul-001", "status": "scored", "pred": "పెదనాన్న", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cul-002", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cul-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cul-004", "status": "scored", "pred": "కాకినాడ కాజా", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cul-004", "status": "scored", "pred": "పెదమ్మ", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cul-005", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cul-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cul-007", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "cul-008", "status": "scored", "pred": "ఓరుగల్లు (వరంగల్)", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cul-009", "status": "scored", "pred": "భోగి (Bhogi)", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "cul-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cul-009", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "cul-010", "status": "scored", "pred": "పిన్ని", "method": "answer_line", "correct": false, "judge_correct": false}
+{"model": "gemma-4-31b-it", "item_id": "rc-001", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "rc-002", "status": "scored", "pred": "దాదాపు రెండు గంటలు", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "rc-003", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-004", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "rc-004", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "rc-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "gemma-4-31b-it", "item_id": "rc-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-007", "status": "scored", "pred": "రెండు పంటలు", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-008", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "gemma-4-31b-it", "item_id": "rc-010", "status": "scored", "pred": "చెత్తను", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-001", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "rc-007", "status": "scored", "pred": "నలభై రూపాయలు", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "rc-008", "status": "scored", "pred": "పన్నెండు గంటలకు", "method": "answer_line", "correct": false, "judge_correct": false}
+{"model": "gemma-4-31b-it", "item_id": "rc-009", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "gemma-4-31b-it", "item_id": "rc-010", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-001", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cm-002", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-003", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-003", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cm-004", "status": "scored", "pred": "A", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-006", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-007", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-008", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cm-009", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-005", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-006", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-007", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-008", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cm-009", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cm-010", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-001", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-002", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-001", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-002", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cul-003", "status": "scored", "pred": "B", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cul-004", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-005", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-006", "status": "scored", "pred": "B", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-005", "status": "scored", "pred": "D", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-006", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cul-007", "status": "scored", "pred": "A", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "cul-008", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-009", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "cul-010", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
-{"model": "random-baseline", "item_id": "rc-001", "status": "scored", "pred": "B", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-009", "status": "scored", "pred": "B", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "cul-010", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "rc-001", "status": "scored", "pred": "B", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "random-baseline", "item_id": "rc-002", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "rc-003", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "rc-004", "status": "scored", "pred": "A", "method": "answer_line", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "rc-004", "status": "scored", "pred": "C", "method": "answer_line", "correct": true, "judge_correct": null}
 {"model": "random-baseline", "item_id": "rc-005", "status": "scored", "pred": "A", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "rc-006", "status": "scored", "pred": "C", "method": "answer_line", "correct": false, "judge_correct": null}
 {"model": "random-baseline", "item_id": "rc-007", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "rc-008", "status": "scored", "pred": "D", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "rc-009", "status": "scored", "pred": "A", "method": "answer_line", "correct": false, "judge_correct": null}
-{"model": "random-baseline", "item_id": "rc-010", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "rc-008", "status": "scored", "pred": null, "method": "none", "correct": false, "judge_correct": null}
+{"model": "random-baseline", "item_id": "rc-009", "status": "scored", "pred": "A", "method": "answer_line", "correct": true, "judge_correct": null}
+{"model": "random-baseline", "item_id": "rc-010", "status": "scored", "pred": "B", "method": "answer_line", "correct": false, "judge_correct": null}

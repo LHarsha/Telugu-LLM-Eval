@@ -34,6 +34,17 @@
       "ok": 20,
       "errors": 0,
       "stopped_early": "daily free-tier quota reached; re-run after the quota resets (Gemini: midnight Pacific time)"
+    },
+    {
+      "started": "2026-11-05T12:07:40+00:00",
+      "finished": "2026-11-05T12:07:40+00:00",
+      "split": "all",
+      "dataset_fingerprint": "45015c4c925ed4aa",
+      "n_items": 30,
+      "attempted": 20,
+      "ok": 0,
+      "errors": 0,
+      "stopped_early": "daily free-tier quota reached; re-run after the quota resets (Gemini: midnight Pacific time)"
     }
   ]
 }

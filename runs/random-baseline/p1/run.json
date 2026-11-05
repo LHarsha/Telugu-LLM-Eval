@@ -30,6 +30,28 @@
       "ok": 30,
       "errors": 0,
       "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:22:46+00:00",
+      "finished": "2026-11-05T12:22:46+00:00",
+      "split": "all",
+      "dataset_fingerprint": "45015c4c925ed4aa",
+      "n_items": 30,
+      "attempted": 13,
+      "ok": 13,
+      "errors": 0,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:47:45+00:00",
+      "finished": "2026-11-05T12:47:45+00:00",
+      "split": "all",
+      "dataset_fingerprint": "81349a2435b51785",
+      "n_items": 30,
+      "attempted": 10,
+      "ok": 10,
+      "errors": 0,
+      "stopped_early": null
     }
   ]
 }

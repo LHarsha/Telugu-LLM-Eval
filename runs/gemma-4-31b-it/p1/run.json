@@ -39,6 +39,61 @@
       "ok": 2,
       "errors": 0,
       "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:09:47+00:00",
+      "finished": "2026-11-05T12:22:46+00:00",
+      "split": "all",
+      "dataset_fingerprint": "45015c4c925ed4aa",
+      "n_items": 30,
+      "attempted": 13,
+      "ok": 12,
+      "errors": 1,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:23:04+00:00",
+      "finished": "2026-11-05T12:24:07+00:00",
+      "split": "all",
+      "dataset_fingerprint": "45015c4c925ed4aa",
+      "n_items": 30,
+      "attempted": 1,
+      "ok": 1,
+      "errors": 0,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:31:43+00:00",
+      "finished": "2026-11-05T12:47:45+00:00",
+      "split": "all",
+      "dataset_fingerprint": "81349a2435b51785",
+      "n_items": 30,
+      "attempted": 10,
+      "ok": 8,
+      "errors": 2,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:47:46+00:00",
+      "finished": "2026-11-05T12:52:35+00:00",
+      "split": "all",
+      "dataset_fingerprint": "81349a2435b51785",
+      "n_items": 30,
+      "attempted": 2,
+      "ok": 1,
+      "errors": 1,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T12:52:51+00:00",
+      "finished": "2026-11-05T12:54:32+00:00",
+      "split": "all",
+      "dataset_fingerprint": "81349a2435b51785",
+      "n_items": 30,
+      "attempted": 1,
+      "ok": 1,
+      "errors": 0,
+      "stopped_early": null
     }
   ]
 }
