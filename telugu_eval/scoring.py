@@ -94,11 +94,24 @@ def extract_short(text: str) -> Extraction:
     return Extraction(None, "none")
 
 
+_GLOSS = re.compile(r"^(.*?)\s*[\(\[]([^()\[\]]+)[\)\]]\s*$")
+
+
+def _answer_variants(pred: str) -> list[str]:
+    """The answer itself, plus both halves of a trailing gloss: "ఓరుగల్లు (వరంగల్)" -> both names."""
+    out = [pred]
+    m = _GLOSS.match(pred.strip())
+    if m:
+        out += [m.group(1), m.group(2)]
+    return out
+
+
 def short_match(pred: str | None, golds: list[str]) -> bool:
     if not pred:
         return False
-    p = normalize_for_match(pred)
-    return bool(p) and any(p == normalize_for_match(g) for g in golds)
+    gold_norm = {normalize_for_match(g) for g in golds}
+    gold_norm.discard("")
+    return any(normalize_for_match(v) in gold_norm for v in _answer_variants(pred))
 
 
 @dataclass

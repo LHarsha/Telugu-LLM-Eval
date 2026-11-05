@@ -78,6 +78,11 @@ def test_extract_short():
     ("కై", ["కై"], True),                   # NFC
     ("౨", ["2"], True),                                # Telugu digit
     ("మామిడి కాయ", ["మామిడి"], False),                # strict: extra word fails (judge may accept)
+    ("ఓరుగల్లు (వరంగల్)", ["వరంగల్"], True),          # gloss in brackets: either half may match
+    ("భోగి (Bhogi)", ["భోగి"], True),
+    ("Bhogi [భోగి]", ["bhogi"], True),
+    ("సంక్రాంతి (భోగి కాదు)", ["భోగి"], False),       # a gloss that isn't the answer does not match
+    ("(B)", ["మామిడి"], False),
     ("", ["మామిడి"], False),
     (None, ["మామిడి"], False),
 ])
@@ -276,6 +281,57 @@ def test_readme_block_update(tmp_path):
     assert update_readme(res, readme)
     text = readme.read_text(encoding="utf-8")
     assert "old" not in text and "No results yet." in text and text.startswith("intro") and text.endswith("outro\n")
+
+
+def test_prerendered_board_works_without_javascript(tmp_path):
+    from telugu_eval.report import prerender_index
+    make_dataset(tmp_path)
+    runs = tmp_path / "runs"
+    good = ModelConfig(name="good", provider="dummy", model="constant", display_name="Good <Model>")
+    run_model(good, select_items("all", tmp_path), runs_dir=runs, log=lambda *a: None,
+              provider=ScriptedModel({"ప్రశ్న ఒకటి": "Answer: B", "Movie": "Answer: ledu"}))
+    res, _ = build_results([good], "all", data_dir=tmp_path, runs_dir=runs)
+    index = tmp_path / "index.html"
+    index.write_text('<div id="facts"><!-- facts:start -->old<!-- facts:end --></div>'
+                     '<table><!-- board:start --><tbody><tr><td>Loading results…</td></tr></tbody><!-- board:end --></table>',
+                     encoding="utf-8")
+    assert prerender_index(res, index)
+    html_text = index.read_text(encoding="utf-8")
+    assert "Loading" not in html_text and "old" not in html_text
+    assert "Good &lt;Model&gt;" in html_text                    # escaped
+    assert "<b>3</b><span>questions</span>" in html_text
+    assert "66.7" in html_text                                  # 2 of 3 correct
+    assert "<b>1</b><span>model evaluated</span>" in html_text
+    # idempotent: a second build gives the same file
+    prerender_index(res, index)
+    assert index.read_text(encoding="utf-8") == html_text
+    # empty results render an explicit message, not a spinner
+    empty = {**res, "models": [], "dataset": {**res["dataset"], "n_items": 0, "chance_accuracy": None}}
+    prerender_index(empty, index)
+    assert "No results yet." in index.read_text(encoding="utf-8")
+
+
+def test_llm_drafted_items_are_disclosed(tmp_path):
+    from telugu_eval.report import notice_text, prerender_index
+    items = make_dataset(tmp_path)
+    items[0]["author"] = "llm-draft"
+    dataio.write_jsonl(tmp_path / dataio.ITEMS_FILE, items)
+    res, _ = build_results([], "all", data_dir=tmp_path, runs_dir=tmp_path / "runs")
+    assert res["dataset"]["n_llm_drafted"] == 1 and res["dataset"]["n_unreviewed"] == 1
+    assert "1 of 3 items were drafted with an LLM" in res["notice"]
+    assert "PRELIMINARY" in res["notice"]
+    index = tmp_path / "index.html"
+    index.write_text("<div><!-- notice:start --><!-- notice:end --></div>", encoding="utf-8")
+    prerender_index(res, index)
+    assert "drafted with an LLM" in index.read_text(encoding="utf-8")
+    # an LLM-drafted item stays disclosed even after it is marked reviewed
+    res_r, _ = build_results([], "reviewed", data_dir=tmp_path, runs_dir=tmp_path / "runs")
+    assert "1 of 2 items were drafted with an LLM" in res_r["notice"]
+    # nothing to disclose on a reviewed set with no LLM-drafted items
+    items[0]["author"] = "a"
+    dataio.write_jsonl(tmp_path / dataio.ITEMS_FILE, items)
+    res_n, _ = build_results([], "reviewed", data_dir=tmp_path, runs_dir=tmp_path / "runs")
+    assert res_n["dataset"]["n_llm_drafted"] == 0 and notice_text(res_n) == ""
 
 
 def test_sample_items_fall_back_to_examples(tmp_path):

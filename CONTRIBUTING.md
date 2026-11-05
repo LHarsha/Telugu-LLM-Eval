@@ -2,7 +2,7 @@
 
 ## Adding benchmark items
 
-Items must be **written natively in Telugu** (or natural Telugu–English code-mixing). Please do not translate items from English datasets or generate them with an AI model; being native-authored is the point of this benchmark.
+Items must be **written directly in Telugu** (or natural Telugu–English code-mixing). Please do not translate items from English datasets. If you used an AI model to draft an item, say so in `author_note`; natively written items are preferred, and every item is verified by a native speaker before it is marked `reviewed`.
 
 1. Fork the repo and start the authoring form:
    ```bash

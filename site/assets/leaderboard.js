@@ -103,9 +103,8 @@
       [nModels, nModels === 1 ? "model evaluated" : "models evaluated"],
       [ds.chance_accuracy != null ? pct(ds.chance_accuracy) + "%" : "–", "random-guess level"],
     ].map(([b, s]) => `<div><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
-    if (data.split !== "reviewed") {
-      $("#notice").innerHTML = `<p class="notice">${esc(data.split_note)}</p>`;
-    }
+    const note = data.notice !== undefined ? data.notice : (data.split !== "reviewed" ? data.split_note : "");
+    $("#notice").innerHTML = note ? `<p class="notice">${esc(note)}</p>` : "";
     $("#meta").textContent = `Dataset ${data.dataset_version} · prompt ${data.prompt_version} · updated ${data.generated}`;
   }
 

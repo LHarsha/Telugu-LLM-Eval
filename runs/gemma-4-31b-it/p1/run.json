@@ -1,0 +1,44 @@
+{
+  "model": {
+    "name": "gemma-4-31b-it",
+    "provider": "gemini",
+    "model": "gemma-4-31b-it",
+    "display_name": "Gemma 4 31B (open weights)",
+    "kind": "open-weights",
+    "base_url": "",
+    "temperature": 0.0,
+    "send_temperature": true,
+    "max_output_tokens": 2048,
+    "extra": {},
+    "notes": "open-weights model served free through the Gemini API",
+    "temperature_sent": 0.0
+  },
+  "prompt_version": "p1",
+  "template_hash": "8e36402cf5d780fa",
+  "dataset_version": "v1",
+  "tool_version": "0.1.0",
+  "history": [
+    {
+      "started": "2026-11-05T10:58:15+00:00",
+      "finished": "2026-11-05T11:31:16+00:00",
+      "split": "all",
+      "dataset_fingerprint": "fb0848fcb05a374c",
+      "n_items": 30,
+      "attempted": 30,
+      "ok": 28,
+      "errors": 2,
+      "stopped_early": null
+    },
+    {
+      "started": "2026-11-05T11:35:41+00:00",
+      "finished": "2026-11-05T11:37:55+00:00",
+      "split": "all",
+      "dataset_fingerprint": "fb0848fcb05a374c",
+      "n_items": 30,
+      "attempted": 2,
+      "ok": 2,
+      "errors": 0,
+      "stopped_early": null
+    }
+  ]
+}

@@ -7,6 +7,7 @@
 
 from __future__ import annotations
 
+import html
 import json
 import shutil
 from collections import Counter
@@ -23,6 +24,8 @@ from .scoring import GROUPS, aggregate, chance_accuracy, score_item
 RESULTS_DIR = dataio.REPO_ROOT / "results"
 SITE_DATA = dataio.REPO_ROOT / "site" / "data"
 README = dataio.REPO_ROOT / "README.md"
+
+LLM_DRAFT_AUTHOR = "llm-draft"
 
 SPLIT_NOTES = {
     "reviewed": "Only items marked reviewed by the author are scored.",
@@ -80,6 +83,9 @@ def dataset_stats(sel: Selection) -> dict:
     for g in GROUPS:
         d[f"by_{g}"] = dict(sorted(Counter(it.get(g, "none") for it in sel.items).items()))
     d["n_passages"] = len({it.get("passage_id") for it in sel.items if it.get("passage_id")})
+    # Provenance: items drafted with an LLM are counted so the site can disclose it.
+    d["n_llm_drafted"] = sum(1 for it in sel.items if it.get("author") == LLM_DRAFT_AUTHOR)
+    d["n_unreviewed"] = sum(1 for it in sel.items if it.get("status") != "reviewed")
     return d
 
 
@@ -114,6 +120,7 @@ def build_results(models: list[ModelConfig], split: str, *, data_dir: Path = dat
         "dataset": dataset_stats(sel),
         "models": rows,
     }
+    results["notice"] = notice_text(results)
     return results, per_item
 
 
@@ -136,6 +143,8 @@ def results_markdown(res: dict) -> str:
     note = [
         "",
         f"Accuracy in %, strict scoring (exact match after normalisation). Split: `{res['split']}`: {res['split_note']}",
+        *([f"**Note:** {res['dataset']['n_llm_drafted']} of {res['dataset']['n_items']} items were drafted with an LLM "
+           "and are pending native-speaker verification."] if res["dataset"].get("n_llm_drafted") else []),
         f"{ds['n_items']} items; chance level {pct(ds['chance_accuracy'])}%. Prompt `{res['prompt_version']}`, "
         f"dataset {res['dataset_version']} (`{res['dataset_fingerprint']}`), generated {res['generated']}.",
     ]
@@ -209,6 +218,74 @@ def prompt_examples(data_dir: Path = dataio.DATA_DIR) -> dict:
     return out
 
 
+def _esc(s) -> str:
+    return html.escape(str(s if s is not None else ""), quote=True)
+
+
+SITE_CATS = (("cultural", "Cultural"), ("code_mixed", "Code-mixed"), ("reading_comprehension", "Reading comp."))
+
+
+def static_board(res: dict) -> tuple[str, str]:
+    """Static HTML for the leaderboard facts strip and table (JS re-renders it with controls)."""
+    ds = res["dataset"]
+    n_models = sum(1 for m in res["models"] if m["kind"] != "baseline" and m["complete"])
+    chance = f"{pct(ds['chance_accuracy'])}%" if ds.get("chance_accuracy") is not None else "–"
+    facts = "".join(f"<div><b>{_esc(b)}</b><span>{_esc(s)}</span></div>" for b, s in (
+        (ds["n_items"], "questions"), (3, "capabilities"),
+        (n_models, "model evaluated" if n_models == 1 else "models evaluated"), (chance, "random-guess level")))
+    head = ("<thead><tr><th>#</th><th>Model</th><th>Overall</th>"
+            + "".join(f"<th>{n}</th>" for _, n in SITE_CATS) + "<th>Items</th></tr></thead>")
+    if not res["models"]:
+        return facts, head + f'<tbody><tr><td class="empty" colspan="{4 + len(SITE_CATS)}">No results yet.</td></tr></tbody>'
+    rows, rank = [], 0
+    for m in res["models"]:
+        ranked = m["complete"] and m["kind"] != "baseline"
+        rank += ranked
+        o = m["overall"]
+        ci = f'<span class="sub">{pct(o["ci95"][0])}–{pct(o["ci95"][1])}</span>' if o.get("ci95") else ""
+        status = "" if m["complete"] else f'<span class="sub">incomplete: {m["n_scored"]}/{m["n_items"]} items answered so far</span>'
+        cats = "".join(f'<td>{pct(m["groups"]["category"].get(k, {}).get("accuracy"))}</td>' for k, _ in SITE_CATS)
+        cls = " ".join(c for c in ("baseline" if m["kind"] == "baseline" else "", "" if m["complete"] else "incomplete") if c)
+        rows.append(f'<tr class="{cls}"><td class="rank">{rank if ranked else ""}</td>'
+                    f'<td class="model"><b>{_esc(m["display_name"])}</b><span class="tag">{_esc(m["kind"])}</span>{status}</td>'
+                    f'<td class="overall"><span class="num">{pct(o["accuracy"])}{ci}</span></td>{cats}<td>{m["n_scored"]}</td></tr>')
+    return facts, head + "<tbody>" + "".join(rows) + "</tbody>"
+
+
+def _replace_block(text: str, name: str, content: str) -> str:
+    start, end = f"<!-- {name}:start -->", f"<!-- {name}:end -->"
+    if start not in text or end not in text:
+        return text
+    before, rest = text.split(start, 1)
+    _, after = rest.split(end, 1)
+    return before + start + content + end + after
+
+
+def notice_text(res: dict) -> str:
+    """Plain-text disclosure shown above the leaderboard (empty when nothing to disclose)."""
+    parts = []
+    if res["split"] != "reviewed":
+        parts.append(res["split_note"])
+    ds = res["dataset"]
+    if ds.get("n_llm_drafted"):
+        parts.append(f"{ds['n_llm_drafted']} of {ds['n_items']} items were drafted with an LLM and are pending "
+                     "verification by a native Telugu speaker.")
+    return " ".join(parts)
+
+
+def prerender_index(res: dict, index: Path = SITE_DATA.parent / "index.html") -> bool:
+    if not index.exists():
+        return False
+    text = index.read_text(encoding="utf-8")
+    facts, board = static_board(res)
+    note = notice_text(res)
+    notice = f'<p class="notice">{_esc(note)}</p>' if note else ""
+    new = _replace_block(_replace_block(_replace_block(text, "facts", facts), "board", board), "notice", notice)
+    if new != text:
+        index.write_text(new, encoding="utf-8", newline="\n")
+    return True
+
+
 def export_site(res: dict, data_dir: Path = dataio.DATA_DIR, site_data: Path = SITE_DATA) -> None:
     site_data.mkdir(parents=True, exist_ok=True)
     (site_data / "results.json").write_text(json.dumps(res, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
@@ -217,6 +294,7 @@ def export_site(res: dict, data_dir: Path = dataio.DATA_DIR, site_data: Path = S
     samples["judge_prompt_template"] = JUDGE_PROMPT
     (site_data / "samples.json").write_text(json.dumps(samples, ensure_ascii=False, indent=2) + "\n",
                                             encoding="utf-8", newline="\n")
+    prerender_index(res, site_data.parent / "index.html")
     # The dataset itself is published with the site (open dataset).
     dl = site_data / "dataset"
     dl.mkdir(exist_ok=True)

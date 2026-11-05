@@ -36,7 +36,7 @@
   <h2>Dataset</h2>
   <dl class="kv" id="dsStats"><dt>Items</dt><dd>…</dd></dl>
   <ul>
-    <li><b>Native-authored.</b> Every question is written in Telugu by a native speaker. Nothing is machine-translated.</li>
+    <li><b>Written in Telugu, origin recorded.</b> Questions are written directly in Telugu; nothing is machine-translated. The current v1 items were drafted with an LLM and are pending verification by a native Telugu speaker. Every item records its origin, and drafts are only counted in results labelled preliminary.</li>
     <li><b>Three capabilities.</b> Cultural knowledge (Telangana and Andhra: festivals, food, places, idioms, customs, history); code-mixed understanding (Telugu–English mixing in Telugu script, in Latin script and in mixed script); reading comprehension (short native passages with questions).</li>
     <li><b>Two answer formats.</b> Multiple choice (four options by convention) and short answer, where every acceptable form of the answer (spelling variants, Telugu, Romanized and English forms) is listed.</li>
     <li><b>Checked twice by the author.</b> Items start as drafts and are only scored after a second check on a different day. A validator catches duplicates (including near-duplicates after Unicode normalisation), malformed options, unbalanced answer positions, answers leaking into questions and mislabelled scripts.</li>
@@ -69,7 +69,8 @@
 
   <h2>Limitations</h2>
   <ul>
-    <li><b>Single annotator.</b> All items were written and validated by one native speaker. There is no inter-annotator agreement yet; regional and dialect blind spots are likely.</li>
+    <li><b>LLM-drafted items.</b> LLM-written questions can contain wrong cultural facts or unnatural phrasing, and may favour the phrasing style of the models being tested. Native verification catches the first two, not fully the third.</li>
+    <li><b>Single annotator.</b> Verification is done by one native speaker. There is no inter-annotator agreement yet; regional and dialect blind spots are likely.</li>
     <li><b>Small size.</b> v1 targets 150 items (50 per capability). Treat scores as indicative, and read them with their confidence intervals.</li>
     <li><b>Free-tier models only.</b> Models were run through free API tiers. Some providers do not support temperature 0 or always use some internal “thinking”, so runs are not perfectly deterministic.</li>
     <li><b>Contamination.</b> The data is public, and prompts sent to free tiers may be used by providers to improve their products. Future models may have seen these items; the canary string makes this detectable.</li>

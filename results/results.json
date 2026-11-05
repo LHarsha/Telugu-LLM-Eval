@@ -1,0 +1,626 @@
+{
+  "benchmark": "Telugu-LLM-Eval",
+  "dataset_version": "v1",
+  "tool_version": "0.1.0",
+  "generated": "2026-11-05",
+  "split": "all",
+  "split_note": "PRELIMINARY: includes draft items that have not been re-checked yet.",
+  "prompt_version": "p1",
+  "template_hash": "8e36402cf5d780fa",
+  "dataset_fingerprint": "fb0848fcb05a374c",
+  "judge": {
+    "name": "gemini-3.5-flash-lite",
+    "display_name": "Gemini 3.5 Flash-Lite",
+    "version": "j1"
+  },
+  "dataset": {
+    "n_items": 30,
+    "chance_accuracy": 0.18333333333333332,
+    "by_category": {
+      "code_mixed": 10,
+      "cultural": 10,
+      "reading_comprehension": 10
+    },
+    "by_script": {
+      "mixed": 4,
+      "romanized": 5,
+      "telugu": 21
+    },
+    "by_difficulty": {
+      "easy": 16,
+      "hard": 2,
+      "medium": 12
+    },
+    "by_answer_type": {
+      "mcq": 22,
+      "short": 8
+    },
+    "by_region": {
+      "andhra": 3,
+      "both": 4,
+      "none": 12,
+      "telangana": 11
+    },
+    "n_passages": 2,
+    "n_llm_drafted": 30,
+    "n_unreviewed": 30
+  },
+  "models": [
+    {
+      "n_items": 30,
+      "n_scored": 30,
+      "n_missing": 0,
+      "complete": true,
+      "missing_items": [],
+      "overall": {
+        "n": 30,
+        "correct": 30,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "parse_failures": 0,
+      "groups": {
+        "category": {
+          "code_mixed": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "cultural": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "reading_comprehension": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "script": {
+          "mixed": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "romanized": {
+            "n": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "telugu": {
+            "n": 21,
+            "correct": 21,
+            "accuracy": 1.0
+          }
+        },
+        "difficulty": {
+          "easy": {
+            "n": 16,
+            "correct": 16,
+            "accuracy": 1.0
+          },
+          "hard": {
+            "n": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "medium": {
+            "n": 12,
+            "correct": 12,
+            "accuracy": 1.0
+          }
+        },
+        "answer_type": {
+          "mcq": {
+            "n": 22,
+            "correct": 22,
+            "accuracy": 1.0
+          },
+          "short": {
+            "n": 8,
+            "correct": 8,
+            "accuracy": 1.0
+          }
+        },
+        "region": {
+          "andhra": {
+            "n": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "both": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "none": {
+            "n": 12,
+            "correct": 12,
+            "accuracy": 1.0
+          },
+          "telangana": {
+            "n": 11,
+            "correct": 11,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "macro_category_accuracy": 1.0,
+      "name": "gemma-4-31b-it",
+      "display_name": "Gemma 4 31B (open weights)",
+      "kind": "open-weights",
+      "provider": "gemini",
+      "model": "gemma-4-31b-it",
+      "settings": {
+        "name": "gemma-4-31b-it",
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "display_name": "Gemma 4 31B (open weights)",
+        "kind": "open-weights",
+        "base_url": "",
+        "temperature": 0.0,
+        "send_temperature": true,
+        "max_output_tokens": 2048,
+        "extra": {},
+        "notes": "open-weights model served free through the Gemini API",
+        "temperature_sent": 0.0
+      }
+    },
+    {
+      "n_items": 30,
+      "n_scored": 30,
+      "n_missing": 0,
+      "complete": true,
+      "missing_items": [],
+      "overall": {
+        "n": 30,
+        "correct": 28,
+        "accuracy": 0.9333333333333333,
+        "ci95": [
+          0.8333333333333334,
+          1.0
+        ]
+      },
+      "parse_failures": 0,
+      "groups": {
+        "category": {
+          "code_mixed": {
+            "n": 10,
+            "correct": 9,
+            "accuracy": 0.9,
+            "ci95": [
+              0.7,
+              1.0
+            ]
+          },
+          "cultural": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "reading_comprehension": {
+            "n": 10,
+            "correct": 9,
+            "accuracy": 0.9,
+            "ci95": [
+              0.7,
+              1.0
+            ]
+          }
+        },
+        "script": {
+          "mixed": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "romanized": {
+            "n": 5,
+            "correct": 4,
+            "accuracy": 0.8
+          },
+          "telugu": {
+            "n": 21,
+            "correct": 20,
+            "accuracy": 0.9523809523809523
+          }
+        },
+        "difficulty": {
+          "easy": {
+            "n": 16,
+            "correct": 14,
+            "accuracy": 0.875
+          },
+          "hard": {
+            "n": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "medium": {
+            "n": 12,
+            "correct": 12,
+            "accuracy": 1.0
+          }
+        },
+        "answer_type": {
+          "mcq": {
+            "n": 22,
+            "correct": 22,
+            "accuracy": 1.0
+          },
+          "short": {
+            "n": 8,
+            "correct": 6,
+            "accuracy": 0.75
+          }
+        },
+        "region": {
+          "andhra": {
+            "n": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "both": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "none": {
+            "n": 12,
+            "correct": 10,
+            "accuracy": 0.8333333333333334
+          },
+          "telangana": {
+            "n": 11,
+            "correct": 11,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "macro_category_accuracy": 0.9333333333333332,
+      "judge": {
+        "overall": {
+          "n": 30,
+          "correct": 30,
+          "accuracy": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "short_answer_items": 8,
+        "judged_items": 2,
+        "judge_flipped_to_correct": 2,
+        "short_strict": {
+          "n": 8,
+          "correct": 6,
+          "accuracy": 0.75
+        },
+        "short_with_judge": {
+          "n": 8,
+          "correct": 8,
+          "accuracy": 1.0
+        },
+        "coverage": "2/2 failed short answers judged",
+        "self_judged": true
+      },
+      "name": "gemini-3.5-flash-lite",
+      "display_name": "Gemini 3.5 Flash-Lite",
+      "kind": "api",
+      "provider": "gemini",
+      "model": "gemini-3.5-flash-lite",
+      "settings": {
+        "name": "gemini-3.5-flash-lite",
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "display_name": "Gemini 3.5 Flash-Lite",
+        "kind": "api",
+        "base_url": "",
+        "temperature": 0.0,
+        "send_temperature": false,
+        "max_output_tokens": 2048,
+        "extra": {},
+        "notes": "temperature not supported on Gemini 3.x; no thinking tokens observed",
+        "temperature_sent": null
+      }
+    },
+    {
+      "n_items": 30,
+      "n_scored": 30,
+      "n_missing": 0,
+      "complete": true,
+      "missing_items": [],
+      "overall": {
+        "n": 30,
+        "correct": 5,
+        "accuracy": 0.16666666666666666,
+        "ci95": [
+          0.03333333333333333,
+          0.3333333333333333
+        ]
+      },
+      "parse_failures": 8,
+      "groups": {
+        "category": {
+          "code_mixed": {
+            "n": 10,
+            "correct": 3,
+            "accuracy": 0.3,
+            "ci95": [
+              0.1,
+              0.6
+            ]
+          },
+          "cultural": {
+            "n": 10,
+            "correct": 2,
+            "accuracy": 0.2,
+            "ci95": [
+              0.0,
+              0.5
+            ]
+          },
+          "reading_comprehension": {
+            "n": 10,
+            "correct": 0,
+            "accuracy": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "script": {
+          "mixed": {
+            "n": 4,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "romanized": {
+            "n": 5,
+            "correct": 2,
+            "accuracy": 0.4
+          },
+          "telugu": {
+            "n": 21,
+            "correct": 3,
+            "accuracy": 0.14285714285714285
+          }
+        },
+        "difficulty": {
+          "easy": {
+            "n": 16,
+            "correct": 4,
+            "accuracy": 0.25
+          },
+          "hard": {
+            "n": 2,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "medium": {
+            "n": 12,
+            "correct": 1,
+            "accuracy": 0.08333333333333333
+          }
+        },
+        "answer_type": {
+          "mcq": {
+            "n": 22,
+            "correct": 5,
+            "accuracy": 0.22727272727272727
+          },
+          "short": {
+            "n": 8,
+            "correct": 0,
+            "accuracy": 0.0
+          }
+        },
+        "region": {
+          "andhra": {
+            "n": 3,
+            "correct": 1,
+            "accuracy": 0.3333333333333333
+          },
+          "both": {
+            "n": 4,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "none": {
+            "n": 12,
+            "correct": 3,
+            "accuracy": 0.25
+          },
+          "telangana": {
+            "n": 11,
+            "correct": 1,
+            "accuracy": 0.09090909090909091
+          }
+        }
+      },
+      "macro_category_accuracy": 0.16666666666666666,
+      "name": "random-baseline",
+      "display_name": "Random guess",
+      "kind": "baseline",
+      "provider": "dummy",
+      "model": "random",
+      "settings": {
+        "name": "random-baseline",
+        "provider": "dummy",
+        "model": "random",
+        "display_name": "Random guess",
+        "kind": "baseline",
+        "base_url": "",
+        "temperature": 0.0,
+        "send_temperature": true,
+        "max_output_tokens": 2048,
+        "extra": {
+          "seed": 0
+        },
+        "notes": "uniform random option for MCQ, empty answer for short answers",
+        "temperature_sent": 0.0
+      }
+    },
+    {
+      "n_items": 30,
+      "n_scored": 20,
+      "n_missing": 10,
+      "complete": false,
+      "missing_items": [
+        "rc-001",
+        "rc-002",
+        "rc-003",
+        "rc-004",
+        "rc-005",
+        "rc-006",
+        "rc-007",
+        "rc-008",
+        "rc-009",
+        "rc-010"
+      ],
+      "overall": {
+        "n": 20,
+        "correct": 20,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ]
+      },
+      "parse_failures": 0,
+      "groups": {
+        "category": {
+          "code_mixed": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "cultural": {
+            "n": 10,
+            "correct": 10,
+            "accuracy": 1.0,
+            "ci95": [
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "script": {
+          "mixed": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "romanized": {
+            "n": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "telugu": {
+            "n": 11,
+            "correct": 11,
+            "accuracy": 1.0
+          }
+        },
+        "difficulty": {
+          "easy": {
+            "n": 12,
+            "correct": 12,
+            "accuracy": 1.0
+          },
+          "medium": {
+            "n": 8,
+            "correct": 8,
+            "accuracy": 1.0
+          }
+        },
+        "answer_type": {
+          "mcq": {
+            "n": 15,
+            "correct": 15,
+            "accuracy": 1.0
+          },
+          "short": {
+            "n": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          }
+        },
+        "region": {
+          "andhra": {
+            "n": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "both": {
+            "n": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "none": {
+            "n": 7,
+            "correct": 7,
+            "accuracy": 1.0
+          },
+          "telangana": {
+            "n": 6,
+            "correct": 6,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "macro_category_accuracy": 1.0,
+      "name": "gemini-3.6-flash",
+      "display_name": "Gemini 3.6 Flash",
+      "kind": "api",
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "settings": {
+        "name": "gemini-3.6-flash",
+        "provider": "gemini",
+        "model": "gemini-3.6-flash",
+        "display_name": "Gemini 3.6 Flash",
+        "kind": "api",
+        "base_url": "",
+        "temperature": 0.0,
+        "send_temperature": false,
+        "max_output_tokens": 2048,
+        "extra": {
+          "generationConfig": {
+            "thinkingConfig": {
+              "thinkingLevel": "low"
+            }
+          }
+        },
+        "notes": "temperature not supported on Gemini 3.x; thinkingLevel=low",
+        "temperature_sent": null
+      }
+    }
+  ],
+  "notice": "PRELIMINARY: includes draft items that have not been re-checked yet. 30 of 30 items were drafted with an LLM and are pending verification by a native Telugu speaker."
+}

@@ -1,0 +1,35 @@
+{
+  "model": {
+    "name": "random-baseline",
+    "provider": "dummy",
+    "model": "random",
+    "display_name": "Random guess",
+    "kind": "baseline",
+    "base_url": "",
+    "temperature": 0.0,
+    "send_temperature": true,
+    "max_output_tokens": 2048,
+    "extra": {
+      "seed": 0
+    },
+    "notes": "uniform random option for MCQ, empty answer for short answers",
+    "temperature_sent": 0.0
+  },
+  "prompt_version": "p1",
+  "template_hash": "8e36402cf5d780fa",
+  "dataset_version": "v1",
+  "tool_version": "0.1.0",
+  "history": [
+    {
+      "started": "2026-11-05T11:35:26+00:00",
+      "finished": "2026-11-05T11:35:26+00:00",
+      "split": "all",
+      "dataset_fingerprint": "fb0848fcb05a374c",
+      "n_items": 30,
+      "attempted": 30,
+      "ok": 30,
+      "errors": 0,
+      "stopped_early": null
+    }
+  ]
+}
