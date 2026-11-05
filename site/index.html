@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telugu-LLM-Eval · Leaderboard</title>
+<meta name="description" content="A native-authored Telugu benchmark for large language models: cultural knowledge, code-mixed text and reading comprehension.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f5f4a'/><text x='16' y='23' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif'>తె</text></svg>">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">Telugu-LLM-Eval <span class="te" lang="te">తెలుగు</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="./" aria-current="page">Leaderboard</a>
+      <a href="examples.html">Examples</a>
+      <a href="methodology.html">Methodology</a>
+      <a class="ext" href="https://github.com/LHarsha/Telugu-LLM-Eval">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <h1>How well do language models understand real Telugu?</h1>
+    <p>A small benchmark of questions written natively in Telugu, not translated from English, and grounded in Telangana and Andhra culture. It tests three things: cultural knowledge, Telugu–English code-mixed text as people actually type it (in Telugu script and Romanized), and reading comprehension.</p>
+    <div class="facts" id="facts"></div>
+    <div id="notice"></div>
+  </div>
+
+  <div class="controls">
+    <label>Columns
+      <span class="seg" id="groupSeg" role="group" aria-label="Break down by"></span>
+    </label>
+    <label id="judgeWrap" hidden>Scoring
+      <span class="seg" id="judgeSeg" role="group" aria-label="Scoring mode"></span>
+    </label>
+  </div>
+
+  <div class="table-wrap">
+    <table class="board" id="board" aria-describedby="legend">
+      <thead></thead>
+      <tbody><tr><td class="empty" colspan="6">Loading results…</td></tr></tbody>
+    </table>
+  </div>
+  <p class="legend" id="legend">Accuracy in %. Bar: <i class="l-range"></i>95% bootstrap confidence interval over items <i class="l-chance"></i>random-guess level. Two models whose intervals overlap heavily are not reliably different.</p>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="meta"></span>
+    <span><a href="data/dataset/items.jsonl">Download dataset (JSONL)</a> · CC BY 4.0 · <a href="https://github.com/LHarsha/Telugu-LLM-Eval">Code (MIT)</a></span>
+  </div>
+</footer>
+<script src="assets/leaderboard.js"></script>
+</body>
+</html>

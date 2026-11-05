@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telugu-LLM-Eval · Methodology</title>
+<meta name="description" content="How the Telugu-LLM-Eval dataset was built and how models are prompted and scored.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f5f4a'/><text x='16' y='23' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif'>తె</text></svg>">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">Telugu-LLM-Eval <span class="te" lang="te">తెలుగు</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="./">Leaderboard</a>
+      <a href="examples.html">Examples</a>
+      <a href="methodology.html" aria-current="page">Methodology</a>
+      <a class="ext" href="https://github.com/LHarsha/Telugu-LLM-Eval">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap prose">
+  <div class="intro">
+    <h1>Methodology</h1>
+    <p>Everything needed to reproduce the leaderboard (items, prompts, every raw model output and the scoring code) is in the <a href="https://github.com/LHarsha/Telugu-LLM-Eval">repository</a>.</p>
+  </div>
+
+  <h2>Why Telugu</h2>
+  <p>Telugu is the mother tongue of about 81 million people in India (Census of India 2011: 81,127,740), the fourth most spoken language in the country. Despite that, it has far less text online and far fewer evaluation sets than its speaker count would suggest, and most existing Telugu test data is translated from English, which misses culture, idiom and the way people actually write: switching between Telugu and English, often in Latin script.</p>
+
+  <h2>Dataset</h2>
+  <dl class="kv" id="dsStats"><dt>Items</dt><dd>…</dd></dl>
+  <ul>
+    <li><b>Native-authored.</b> Every question is written in Telugu by a native speaker. Nothing is machine-translated.</li>
+    <li><b>Three capabilities.</b> Cultural knowledge (Telangana and Andhra: festivals, food, places, idioms, customs, history); code-mixed understanding (Telugu–English mixing in Telugu script, in Latin script and in mixed script); reading comprehension (short native passages with questions).</li>
+    <li><b>Two answer formats.</b> Multiple choice (four options by convention) and short answer, where every acceptable form of the answer (spelling variants, Telugu, Romanized and English forms) is listed.</li>
+    <li><b>Checked twice by the author.</b> Items start as drafts and are only scored after a second check on a different day. A validator catches duplicates (including near-duplicates after Unicode normalisation), malformed options, unbalanced answer positions, answers leaking into questions and mislabelled scripts.</li>
+    <li><b>Open.</b> The dataset is released under CC BY 4.0. Every record carries a canary string so it can be filtered out of training corpora.</li>
+  </ul>
+
+  <h2>Prompting</h2>
+  <p>Every model receives exactly the same prompt for an item: a single user message, no system prompt, no examples (zero-shot). The instructions are in English so that the test measures understanding of the Telugu content rather than instruction-following in Telugu. Models are asked to finish with an <code>Answer:</code> line. Temperature is 0 where the provider supports it; the settings actually sent to each model are stored with its results.</p>
+  <h3>Multiple choice</h3>
+  <pre class="block te" id="pMcq">…</pre>
+  <h3>Short answer</h3>
+  <pre class="block te" id="pShort">…</pre>
+  <h3>Reading comprehension</h3>
+  <pre class="block te" id="pRc">…</pre>
+
+  <h2>Scoring</h2>
+  <ul>
+    <li><b>Multiple choice:</b> the letter on the last <code>Answer:</code> line is compared with the correct letter. A reply that is only a letter, or that exactly repeats one option's text, is also accepted. Anything else counts as wrong and is reported as unparseable.</li>
+    <li><b>Short answer (strict, the headline score):</b> the answer must equal one of the accepted answers after normalisation.</li>
+    <li><b>Normalisation:</b> Unicode NFC (so differently encoded but identical Telugu text matches), removal of zero-width joiners and other invisible characters, Telugu digits mapped to 0–9, punctuation including the danda removed, Latin text lower-cased, whitespace collapsed.</li>
+    <li><b>Confidence intervals:</b> 95% percentile bootstrap over items (2,000 resamples, fixed seed). With a few dozen items per capability, differences of several points can be noise; overlapping intervals mean the ranking is not reliable.</li>
+    <li><b>Baseline:</b> a random-guess row and a dashed chance line show what no understanding scores.</li>
+    <li><b>Incomplete runs:</b> free API tiers have daily limits, so a model may not have answered every item yet. Missing answers are not counted as wrong; such models are marked incomplete and not ranked.</li>
+  </ul>
+
+  <h2>Optional LLM judge</h2>
+  <p>Strict matching is harsh on correct short answers phrased differently (for example “రెండు ఎకరాలు” when the accepted answer is “రెండు”). As a clearly separate, secondary view, short answers that fail the strict match can be re-checked by an LLM judge<span id="judgeName"></span>. The judge sees the question, all accepted answers and the model's answer, and replies CORRECT or INCORRECT. Verdicts are cached and published with the raw outputs.</p>
+  <p><b>How much to trust it:</b> the judge is itself a language model with imperfect Telugu. It can be lenient with near-misses, and it may favour models from its own family. Judge-assisted scores are therefore never the headline number and are only shown when you switch to them.</p>
+  <details><summary>Judge prompt</summary><pre class="block" id="pJudge">…</pre></details>
+
+  <h2>Limitations</h2>
+  <ul>
+    <li><b>Single annotator.</b> All items were written and validated by one native speaker. There is no inter-annotator agreement yet; regional and dialect blind spots are likely.</li>
+    <li><b>Small size.</b> v1 targets 150 items (50 per capability). Treat scores as indicative, and read them with their confidence intervals.</li>
+    <li><b>Free-tier models only.</b> Models were run through free API tiers. Some providers do not support temperature 0 or always use some internal “thinking”, so runs are not perfectly deterministic.</li>
+    <li><b>Contamination.</b> The data is public, and prompts sent to free tiers may be used by providers to improve their products. Future models may have seen these items; the canary string makes this detectable.</li>
+    <li><b>Answer format.</b> A model that understands the question but ignores the requested answer format is scored as wrong.</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="meta"></span>
+    <span><a href="https://github.com/LHarsha/Telugu-LLM-Eval">GitHub</a></span>
+  </div>
+</footer>
+<script src="assets/methodology.js"></script>
+</body>
+</html>

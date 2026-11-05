@@ -1,0 +1,129 @@
+# Model registry. Adding a model = adding one [[model]] block.
+#
+# Everything enabled here runs on FREE tiers only. Keys come from environment
+# variables or a git-ignored .env file (see .env.example), never from this file.
+#
+# Fields (all optional except name/provider/model):
+#   name               stable id used in results + leaderboard (letters, digits, - _ .)
+#   provider           gemini | openai_compatible | dummy
+#   model              the provider's model string
+#   display_name       pretty name for the leaderboard
+#   kind               api | open-weights | baseline
+#   enabled            included by `run --all`
+#   api_key_env        env var holding the API key
+#   base_url           openai_compatible only
+#   temperature        default 0.0
+#   send_temperature   false for models that deprecate/ignore temperature (recorded in results)
+#   max_output_tokens  default 1024
+#   rpm                client-side requests-per-minute cap, to stay inside free-tier limits
+#   extra              provider-specific request fields, merged into the request body
+#   notes              free text, stored with results
+
+# Optional LLM judge for short answers (reported separately from strict scores).
+# Must name a [[model]] below. Judging is a separate command that calls the API:
+#   python -m telugu_eval judge
+[judge]
+model = "gemini-3.5-flash-lite"
+
+[defaults]
+temperature = 0.0
+send_temperature = true
+max_output_tokens = 2048   # thinking tokens count against this; keep headroom
+timeout_s = 120
+max_retries = 5
+
+# --- Free via Google AI Studio (one free key: https://aistudio.google.com/apikey) ---
+
+[[model]]
+name = "gemini-3.8-flash"
+display_name = "Gemini 3.8 Flash"
+provider = "gemini"
+model = "gemini-3.8-flash"
+kind = "api"
+api_key_env = "GEMINI_API_KEY"
+rpm = 8
+# Gemini 3.x deprecates temperature/top_p/top_k and thinking cannot be turned
+# off; we use the lowest thinking level and record that temperature was not sent.
+send_temperature = false
+extra = { generationConfig = { thinkingConfig = { thinkingLevel = "low" } } }
+notes = "temperature not supported on Gemini 3.x; thinkingLevel=low; free tier ~20 requests/day (Nov 2026), so a full run spans several days"
+
+[[model]]
+name = "gemini-3.6-flash"
+display_name = "Gemini 3.6 Flash"
+provider = "gemini"
+model = "gemini-3.6-flash"
+kind = "api"
+api_key_env = "GEMINI_API_KEY"
+rpm = 8
+send_temperature = false
+extra = { generationConfig = { thinkingConfig = { thinkingLevel = "low" } } }
+notes = "temperature not supported on Gemini 3.x; thinkingLevel=low"
+
+[[model]]
+name = "gemini-3.5-flash-lite"
+display_name = "Gemini 3.5 Flash-Lite"
+provider = "gemini"
+model = "gemini-3.5-flash-lite"
+kind = "api"
+api_key_env = "GEMINI_API_KEY"
+rpm = 8
+send_temperature = false
+notes = "temperature not supported on Gemini 3.x; no thinking tokens observed"
+
+[[model]]
+name = "gemma-4-31b-it"
+display_name = "Gemma 4 31B (open weights)"
+provider = "gemini"
+model = "gemma-4-31b-it"
+kind = "open-weights"
+api_key_env = "GEMINI_API_KEY"
+rpm = 8
+notes = "open-weights model served free through the Gemini API"
+
+# --- Baseline (no API) -----------------------------------------------------
+
+[[model]]
+name = "random-baseline"
+display_name = "Random guess"
+provider = "dummy"
+model = "random"
+kind = "baseline"
+extra = { seed = 0 }
+notes = "uniform random option for MCQ, empty answer for short answers"
+
+# --- Optional, disabled by default ------------------------------------------
+# Enable by setting enabled = true (and setting the key) — keep it free.
+
+[[model]]
+name = "openrouter-free-example"
+display_name = "OpenRouter free model (example)"
+provider = "openai_compatible"
+base_url = "https://openrouter.ai/api/v1"
+model = "meta-llama/llama-3.3-70b-instruct:free"   # check openrouter.ai/models?q=free for current ':free' ids
+kind = "open-weights"
+api_key_env = "OPENROUTER_API_KEY"
+enabled = false
+rpm = 15
+notes = "free tier: ~50 requests/day per account; the runner resumes across days"
+
+[[model]]
+name = "ollama-local-example"
+display_name = "Local model via Ollama (example)"
+provider = "openai_compatible"
+base_url = "http://localhost:11434/v1"
+model = "gemma3:4b"
+kind = "open-weights"
+enabled = false
+notes = "runs on your own machine; free, no key"
+
+[[model]]
+name = "hf-router-example"
+display_name = "Hugging Face router (example)"
+provider = "openai_compatible"
+base_url = "https://router.huggingface.co/v1"
+model = "Qwen/Qwen2.5-7B-Instruct"
+kind = "open-weights"
+api_key_env = "HF_TOKEN"
+enabled = false
+notes = "NOT free: free HF accounts have no Inference Provider credits (as of Nov 2026)"

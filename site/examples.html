@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telugu-LLM-Eval · Examples</title>
+<meta name="description" content="Example questions from each capability of the Telugu-LLM-Eval benchmark.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f5f4a'/><text x='16' y='23' font-size='18' text-anchor='middle' fill='white' font-family='sans-serif'>తె</text></svg>">
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./">Telugu-LLM-Eval <span class="te" lang="te">తెలుగు</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="./">Leaderboard</a>
+      <a href="examples.html" aria-current="page">Examples</a>
+      <a href="methodology.html">Methodology</a>
+      <a class="ext" href="https://github.com/LHarsha/Telugu-LLM-Eval">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <div class="intro">
+    <h1>What the questions look like</h1>
+    <p>Up to five questions from each capability, exactly as the models see them (the instructions around them are on the <a href="methodology.html">methodology</a> page). Correct answers are hidden until you show them.</p>
+  </div>
+  <div class="controls">
+    <label>Answers
+      <span class="seg" id="ansSeg" role="group" aria-label="Show answers"></span>
+    </label>
+  </div>
+  <div id="cats"><p class="empty">Loading…</p></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>The full dataset is open: <a href="data/dataset/items.jsonl">items.jsonl</a> · <a href="data/dataset/passages.jsonl">passages.jsonl</a> (CC BY 4.0)</span>
+    <span><a href="https://github.com/LHarsha/Telugu-LLM-Eval">GitHub</a></span>
+  </div>
+</footer>
+<script src="assets/examples.js"></script>
+</body>
+</html>

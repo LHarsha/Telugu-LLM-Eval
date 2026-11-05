@@ -7,9 +7,9 @@ name = "telugu-eval"
 version = "0.1.0"
 description = "A native-authored Telugu LLM evaluation benchmark: dataset tooling, evaluation harness and scoring."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"  # tomllib
 license = { text = "MIT" }
-# Step 1 (dataset tooling) uses only the Python standard library.
+# Only the Python standard library is used (HTTP via urllib, config via tomllib).
 dependencies = []
 
 [project.urls]
